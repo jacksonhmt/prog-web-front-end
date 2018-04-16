@@ -1,0 +1,1 @@
+const API_APPLE = 'http://localhost:8181/api'

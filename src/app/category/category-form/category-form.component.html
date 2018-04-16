@@ -1,0 +1,16 @@
+<form [formGroup]="categoryForm" novalidate>
+    <div class="form-group">
+        <label for="Nome">Categoria
+            <b class="red">*</b>
+        </label>
+        <input type="text" class="form-control text-muted" name="nome" formControlName="nome" maxlength="50" placeholder="Categoria">
+    </div>
+    <button type="submit" class="btn btn-outline-primary" (click)="save(categoryForm.value)">
+        Salvar
+    </button>
+    <button class="btn btn-outline-secondary" [routerLink]="['/category/list']">
+        Cancelar
+    </button>
+</form>
+
+<span> {{categoryForm.value | json}}</span>

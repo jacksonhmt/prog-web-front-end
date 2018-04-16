@@ -1,0 +1,20 @@
+<form [formGroup]="categoryForm" novalidate>
+    <div class="form-group row">
+        <div class="col-md-1">
+            <label for="Nome">ID</label>
+            <input type="text" class="form-control text-muted" name="id" formControlName="id" readonly>
+        </div>
+        <div class="col-md-11">
+            <label for="Nome">Categoria</label>
+            <input type="text" class="form-control text-muted" name="nome" formControlName="nome" readonly>
+        </div>
+    </div>
+    <button class="btn btn-outline-primary" [routerLink]="['/category/alter/', category.id]">
+        Alterar
+    </button>
+    <button class="btn btn-outline-secondary" [routerLink]="['/category/list']">
+        Cancelar
+    </button>
+</form>
+
+<span> {{categoryForm.value | json}}</span>
