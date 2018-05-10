@@ -7,6 +7,7 @@ const appRoutes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
     { path: 'category', loadChildren: 'app/category/category.module#CategoryModule'},
+    { path: 'product', loadChildren: 'app/product/product.module#ProductModule' },
     { path: '**', component: PageNotFoundComponent }
 ];
 

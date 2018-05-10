@@ -1,1 +1,1 @@
-const API_APPLE = 'http://localhost:8181/api'
+export const API_APPLE = 'http://localhost:8181/api'

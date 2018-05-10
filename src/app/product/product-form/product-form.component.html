@@ -1,0 +1,34 @@
+<form [formGroup]="productForm" novalidate>
+    <div class="form-group">
+        <label for="Nome">Produto
+            <b class="red">*</b>
+        </label>
+        <input type="text" class="form-control text-muted" name="nome" formControlName="nome" maxlength="80" placeholder="Nome">
+    </div>
+    <div class="form-group">
+        <label for="Nome">Marca
+            <b class="red">*</b>
+        </label>
+        <input type="text" class="form-control text-muted" name="marca" formControlName="marca" maxlength="50" placeholder="Marca">
+    </div>
+    <div class="form-group">
+        <label for="Nome">Descrição
+            <b class="red">*</b>
+        </label>
+        <input type="text" class="form-control text-muted" name="descricao" formControlName="descricao" maxlength="200">
+    </div>
+    <div class="form-group">
+        <label for="Nome">Preco
+            <b class="red">*</b>
+        </label>
+        <input type="number" class="form-control text-muted" name="preco" formControlName="preco" maxlength="10">
+    </div>
+    <button type="submit" class="btn btn-outline-primary" (click)="save(productForm.value)">
+        Salvar
+    </button>
+    <button class="btn btn-outline-secondary" [routerLink]="['/product/list']">
+        Cancelar
+    </button>
+</form>
+
+<span> {{productForm.value | json}}</span>

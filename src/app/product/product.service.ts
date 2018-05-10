@@ -4,45 +4,40 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import { Category } from './category';
+import { Product } from './product';
+// import { API_APPLE } from './../app.api';
 
-// Classe de serviço referente a categoria.
 @Injectable()
-export class CategoryService {
-
-    private API_APPLE = 'http://localhost:8181/api'
+export class ProductService {
 
     constructor(private http: Http) { }
 
-    //Recupera todas as categorias registrados na base de dados.
-    findAll(): Observable<Category[]> {
+    findAll(): Observable<Product[]> {
         return this.http
-            .get(`${this.API_APPLE}/category`)
+            .get(`http://localhost:8181/api/product`)
             .map(response => response.json().content);
     }
 
-    findById(id: number): Observable<Category> {
+    findById(id: number): Observable<Product> {
         return this.http
-        .get(`${this.API_APPLE}/category/${id}`)
+        .get(`http://localhost:8181/api/product/${id}`)
         .map(response => response.json().content);
     }
 
-    // deleta a categoria da base de dados.
     delete(id: number) {
         return this.http
-            .delete(`${this.API_APPLE}/category/${id}`)
+            .delete(`http://localhost:8181/api/product/${id}`)
             .map(res => res.json().content);
     }
 
-    // Salva a categoria na base de dados.
-    save(category: Category): Observable<any> {
+    save(product: Product): Observable<any> {
 
         let headers = new Headers({ 'Content-Type': 'application/json' })
         let options = new RequestOptions({ headers: headers })
 
-        const body = JSON.stringify(category);
+        const body = JSON.stringify(product);
 
-        return this.http.post(`${this.API_APPLE}/category`, body, options)
+        return this.http.post(`http://localhost:8181/api/product`, body, options)
             .map(response => response.json());
     }
 }

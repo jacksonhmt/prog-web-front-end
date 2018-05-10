@@ -7,16 +7,12 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th scope="col">ID</th>
                 <th scope="col">Categoria</th>
                 <th scope="col">Ação</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let category of categorys">
-                <th>
-                    <div class="mt-1">{{category.id}}</div>
-                </th>
                 <td>
                     <div class="mt-1">{{category.nome}}</div>
                 </td>
