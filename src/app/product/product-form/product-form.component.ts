@@ -4,6 +4,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Product } from '../product';
 import { ProductService } from '../product.service';
+import { CategoryService } from '../../category/category.service';
+import { Category } from '../../category/category';
 
 @Component({
   selector: 'app-product-form',
@@ -13,16 +15,22 @@ export class ProductFormComponent implements OnInit {
   
   productForm: FormGroup;
   product: Product;
+  categories: Category[];
 
   constructor(
     private productService: ProductService,
     private router: Router,
     private route: ActivatedRoute,
     private builder: FormBuilder,
-
+    public categoryService: CategoryService
   ) { }
 
   ngOnInit() {
+    this.categoryService.findAll()
+    .subscribe(categories => {
+      this.categories = categories;
+    })
+
     //validações de campos
     this.productForm = this.builder.group({
       id: [],
@@ -30,6 +38,7 @@ export class ProductFormComponent implements OnInit {
       marca: ['', [Validators.required, Validators.maxLength(60)]],
       descricao: ['', [Validators.required, Validators.maxLength(200)]],
       preco: ['', [Validators.required, Validators.maxLength(10)]],
+      category: ['', [Validators.required, Validators.maxLength(10)]],
     }, {})
 
     this.route.params.forEach((params: Params) => {
@@ -41,7 +50,11 @@ export class ProductFormComponent implements OnInit {
           });
       }
     })
-  } 
+  }
+  
+  compareFn(c1: Category, c2: Category): boolean{
+    return c1 && c2 ? c1.id === c2.id : c1 === c2;
+  }
 
   // Salva a categoria e retorna a lista de categorias
   save(product: Product) {

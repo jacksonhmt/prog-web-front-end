@@ -17,7 +17,7 @@ export class ProductService {
             .get(`http://localhost:8181/api/product`)
             .map(response => response.json().content);
     }
-
+ 
     findById(id: number): Observable<Product> {
         return this.http
         .get(`http://localhost:8181/api/product/${id}`)

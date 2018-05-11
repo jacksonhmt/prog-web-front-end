@@ -1,27 +1,46 @@
 <form [formGroup]="productForm" novalidate>
     <div class="form-group">
-        <label for="Nome">Produto
-            <b class="red">*</b>
-        </label>
-        <input type="text" class="form-control text-muted" name="nome" formControlName="nome" maxlength="80" placeholder="Nome">
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" id="customFile">
+            <label class="custom-file-label" for="customFile">Choose file</label>
+        </div>
     </div>
-    <div class="form-group">
-        <label for="Nome">Marca
-            <b class="red">*</b>
-        </label>
-        <input type="text" class="form-control text-muted" name="marca" formControlName="marca" maxlength="50" placeholder="Marca">
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label for="Nome">Produto
+                <b class="red">*</b>
+            </label>
+            <input type="text" class="form-control text-muted" name="nome" formControlName="nome" maxlength="80" placeholder="Nome">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="Nome">Marca
+                <b class="red">*</b>
+            </label>
+            <input type="text" class="form-control text-muted" name="marca" formControlName="marca" maxlength="50" placeholder="Marca">
+        </div>
     </div>
     <div class="form-group">
         <label for="Nome">Descrição
             <b class="red">*</b>
         </label>
-        <input type="text" class="form-control text-muted" name="descricao" formControlName="descricao" maxlength="200">
+        <textarea name="descricao" class="form-control" formControlName="descricao" maxlength="200" rows="3"></textarea>
     </div>
-    <div class="form-group">
-        <label for="Nome">Preco
-            <b class="red">*</b>
-        </label>
-        <input type="number" class="form-control text-muted" name="preco" formControlName="preco" maxlength="10">
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label for="Nome">Preco
+                <b class="red">*</b>
+            </label>
+            <input type="number" class="form-control text-muted" name="preco" formControlName="preco" maxlength="10">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="inputCategroria">Categoria</label>
+            <select id="inputCategroria" class="form-control" formControlName="category" [compareWith]="compareFn">
+                <option selected>Selecione</option>
+                <option *ngFor="let category of categories" [ngValue]="category">
+                    {{category.nome}}
+                </option>
+            </select>
+        </div>
     </div>
     <button type="submit" class="btn btn-outline-primary" (click)="save(productForm.value)">
         Salvar
@@ -31,4 +50,4 @@
     </button>
 </form>
 
-<span> {{productForm.value | json}}</span>
+<!-- <span> {{productForm.value | json}}</span> -->
