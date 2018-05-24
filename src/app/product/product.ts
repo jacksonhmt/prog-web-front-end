@@ -3,5 +3,5 @@ export class Product {
     nome: String;
     marca: String;
     descricao: String;
-    preco: number;
+    preco: Float64Array;
 }

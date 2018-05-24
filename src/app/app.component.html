@@ -22,7 +22,18 @@
           </a>
         </li>
       </ul>
-      <span class="navbar-text offset-lg-1">Descubra o mundo inovador da Apple!</span>
+    </div>
+    <div>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a id="modalLogin" class="nav-link" routerLinkActive="active" [routerLink]="['/shopping-cart']">
+            <i class="material-icons left">
+              shopping_cart
+            </i>
+          </a>
+        </li>
+        <p class="mt-2">{{tamanho}}</p>
+      </ul>
     </div>
   </div>
 </nav>
@@ -43,11 +54,6 @@
     <li>
       <a routerLinkActive="active" [routerLink]="['/category']">
         Categoria
-      </a>
-    </li>
-    <li>
-      <a routerLinkActive="active" [routerLink]="['/carrinho']">
-        Carrinho
       </a>
     </li>
   </ul>

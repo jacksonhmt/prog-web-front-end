@@ -1,6 +1,6 @@
 <div>
     <button [routerLink]="['/product/form']" type="button" class="btn btn-success">
-        <i class="material-icons left">add</i> Produto
+        Novo Produto
     </button>
 </div>
 <div class="mt-3">
@@ -8,9 +8,7 @@
         <thead>
             <tr>
                 <th scope="col">Produto</th>
-                <th scope="col">Marca</th>
                 <th scope="col">Descricao</th>
-                <th scope="col">Preço</th>
                 <th scope="col">Ação</th>
             </tr>
         </thead>
@@ -20,13 +18,7 @@
                     <div class="mt-1">{{product.nome}}</div>
                 </td>
                 <td>
-                    <div class="mt-1">{{product.marca}}</div>
-                </td>
-                <td>
                     <div class="mt-1" id="limite12em">{{product.descricao}}</div>
-                </td>
-                <td>
-                    <div class="mt-1">{{product.preco}}</div>
                 </td>
                 <td>
                     <button type="button" class="btn btn-outline-info btn-sm" [routerLink]="['/product/view/', product.id]" title="Visualizar {{product.nome}}">

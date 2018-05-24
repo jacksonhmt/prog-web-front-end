@@ -1,0 +1,7 @@
+<ul class="list-group" *ngFor="let p of lista()">
+  <li class="list-group-item mb-2">{{p.produto.nome}} - R${{p.produto.preco}} - 
+    <button type="button" class="btn btn-outline-danger btn-sm" (click)="delete(p.index)">
+      <i class="material-icons center-button">delete_forever</i>
+    </button>
+  </li>
+</ul>

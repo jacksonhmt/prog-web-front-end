@@ -29,6 +29,7 @@ export class ProductListComponent implements OnInit {
     this.productService.findAll()
       .subscribe(products => {
         this.products = products;
+        this.validationList()
       });
   }
 
