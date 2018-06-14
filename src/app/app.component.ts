@@ -1,19 +1,29 @@
-import { Component } from '@angular/core';
-import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
-  
-tamanho:number = 0;
-  constructor() {
-
-  }
+export class AppComponent implements OnInit{
+  tamanho:number = 0;
+  constructor() { }
 
   ngOnInit() {
-    this.tamanho = JSON.parse(localStorage.getItem("produtos")).length;
+    this.atualizaNumero();
+  }
+
+  atualizaNumero(){
+    let produtos = localStorage.getItem("produtos") ?
+      JSON.parse(localStorage.getItem("produtos")) :
+      [];
+
+    let quantidadeDeProdutos = 0;
+
+    for (let i = 0; i < produtos.length; i++) {
+      quantidadeDeProdutos = quantidadeDeProdutos + produtos[i].quantidade; 
+    }
+
+    this.tamanho = quantidadeDeProdutos;
   }
 }
