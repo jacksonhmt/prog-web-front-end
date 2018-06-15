@@ -36,7 +36,8 @@ export class HomeComponent implements OnInit {
     let item = {
       produto: produto,
       index: produtos.length + 1,
-      quantidade: 1
+      quantidade: 1,
+      valorUnitario: 0
     }
 
     var teste = true;
@@ -49,6 +50,8 @@ export class HomeComponent implements OnInit {
         teste = false;
       }
     }
+
+    item.valorUnitario = produto.preco;
 
     if (teste) {
       produtos.push(item);
