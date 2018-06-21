@@ -6,6 +6,7 @@ import { Product } from '../product';
 import { ProductService } from '../product.service';
 import { CategoryService } from '../../category/category.service';
 import { Category } from '../../category/category';
+import { ToastrService } from '../../toastr.service'
 
 @Component({
   selector: 'app-product-form',
@@ -22,7 +23,8 @@ export class ProductFormComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private builder: FormBuilder,
-    public categoryService: CategoryService
+    public categoryService: CategoryService,
+    public toastrService: ToastrService
   ) { }
 
   ngOnInit() {
@@ -61,6 +63,7 @@ export class ProductFormComponent implements OnInit {
     this.productService.save(product).subscribe(data => {
       this.router.navigate(['/product']);
     })
+    this.toastrService.Success('Salvo com sucesso!');
   }
 
   private handleError(err: any): Promise<any> {

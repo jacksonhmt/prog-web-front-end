@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../product/product';
 import { AppComponent } from '../app.component';
+import { ShoppingCartService } from './shopping-cart.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Coupon } from './coupon';
+import { ToastrService } from '../toastr.service'
 
 @Component({
   selector: 'app-shopping-cart',
@@ -11,12 +15,21 @@ export class ShoppingCartComponent implements OnInit {
   nome: string[] = [];
   aux: string;
   valorTotal: Number = 0;
+  couponForm: FormGroup;
 
   constructor(
-    public appComponent: AppComponent
+    public appComponent: AppComponent,
+    private shoppingCartService: ShoppingCartService,
+    private builder: FormBuilder,
+    private toastrService: ToastrService
   ) { }
 
   ngOnInit() {
+    this.couponForm = this.builder.group({
+      id: [],
+      name: ['', [Validators.maxLength(10)]],
+    }, {})
+
     this.lista();
     this.precoTotal();
   }
@@ -67,15 +80,41 @@ export class ShoppingCartComponent implements OnInit {
 
   precoTotal() {
     let produtos = localStorage.getItem("produtos") ?
-      JSON.parse(localStorage.getItem("produtos")) :
-      [];
-
+    JSON.parse(localStorage.getItem("produtos")) :
+    [];
+    
     let valorTotalAux = 0;
-
+    
     for (let i = 0; i < produtos.length; i++) {
       valorTotalAux = valorTotalAux + produtos[i].produto.preco;
     }
+    
+    if(localStorage.getItem('desconto') != null) {
+      let desconto = parseInt(localStorage.getItem('desconto'));
+      valorTotalAux = valorTotalAux - (valorTotalAux * desconto/100); 
+      console.log('desconto armazenado: ' + localStorage.getItem('desconto'));
+    }
 
     this.valorTotal = valorTotalAux;
+  }
+
+  codDesconto(nomeCod: Coupon) {
+    console.log('cupon: ' + typeof nomeCod.name.toString());
+
+    this.shoppingCartService.findCouponByName(nomeCod.name)
+    .subscribe( resp => {
+      localStorage.setItem('desconto', resp.amount.toString());
+      this.precoTotal();
+      this.toastrService.Success('Cupom aplicado com sucesso!');
+    }, 
+    err => {
+      this.toastrService.Error('Cupom inválido!');
+    })
+  }
+
+  limparCodigo() {
+    localStorage.removeItem('desconto');
+    this.toastrService.Success('Cupom removido com sucesso!');
+    this.precoTotal();
   }
 }

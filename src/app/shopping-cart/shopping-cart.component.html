@@ -1,3 +1,11 @@
+<form [formGroup]="couponForm" class="form-inline mb-3 mt-3">
+  <label class="sr-only" for="inlineFormInput">Name</label>
+  <input type="text" formControlName="name" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="Código de Desconto">
+
+  <button type="button" class="btn btn-primary" (click)="codDesconto(couponForm.value)">Aplicar</button>
+  <button type="button" class="ml-2 btn btn-danger" (click)="limparCodigo()">Limpar Codigo</button>
+</form>
+
 <table class="table table-striped">
   <thead>
     <tr>

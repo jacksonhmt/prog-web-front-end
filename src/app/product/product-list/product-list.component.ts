@@ -3,6 +3,7 @@ import { Subject } from 'rxjs/Subject';
 import { Router } from '@angular/router';
 import { Product } from '../product';
 import { ProductService } from '../product.service';
+import { ToastrService } from '../../toastr.service'
 
 @Component({
   selector: 'app-product-list',
@@ -17,7 +18,8 @@ export class ProductListComponent implements OnInit {
 
   constructor(
     private router: Router,
-    public productService: ProductService
+    public productService: ProductService,
+    public toastrService: ToastrService
   ) { }
 
   ngOnInit() {
@@ -48,5 +50,6 @@ export class ProductListComponent implements OnInit {
       this.products = [];
       this.findAll();
     });
+    this.toastrService.Success('Excluído com sucesso!');
   }
 }

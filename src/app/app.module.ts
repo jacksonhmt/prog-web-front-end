@@ -10,6 +10,9 @@ import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductService } from './product/product.service';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { ShoppingCartService } from './shopping-cart/shopping-cart.service';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ToastrService } from './toastr.service'
 
 
 @NgModule({
@@ -22,12 +25,15 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
   imports: [
     HttpModule,
     HttpClientModule,
+    ReactiveFormsModule,
     CommonModule,
     BrowserModule,
     AppRoutingModule,
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy},
-  ProductService
+  ProductService,
+  ShoppingCartService,
+  ToastrService
   ],
   bootstrap: [AppComponent]
 })

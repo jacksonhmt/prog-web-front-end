@@ -3,6 +3,7 @@ import { Subject } from 'rxjs/Subject';
 import { Router } from '@angular/router';
 import { Category } from '../category';
 import { CategoryService } from '../category.service';
+import { ToastrService } from '../../toastr.service'
 
 @Component({
   selector: 'app-category-list',
@@ -17,7 +18,8 @@ export class CategoryListComponent implements OnInit {
 
   constructor(
     private router: Router,
-    public categoryService: CategoryService
+    public categoryService: CategoryService,
+    public toastrService: ToastrService
   ) { }
 
   ngOnInit() {
@@ -50,5 +52,6 @@ export class CategoryListComponent implements OnInit {
       this.categorys = [];
       this.findAll();
     });
+    this.toastrService.Success('Excluído com sucesso!');
   }
 }

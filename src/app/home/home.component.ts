@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Product } from '../product/product';
 import { ProductService } from '../product/product.service';
 import { AppComponent } from '../app.component';
+import { ToastrService } from '../toastr.service'
 
 
 @Component({
@@ -21,7 +22,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private router: Router,
     public productService: ProductService,
-    public appComponent: AppComponent
+    public appComponent: AppComponent,
+    public toastrService: ToastrService
   ) { }
 
   ngOnInit() {
@@ -59,6 +61,7 @@ export class HomeComponent implements OnInit {
 
     localStorage.setItem("produtos", JSON.stringify(produtos));
     this.appComponent.atualizaNumero();
+    this.toastrService.Success('Produto adicionado no carrinho!');
   }
 
   findAll() {
