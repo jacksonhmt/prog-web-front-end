@@ -1,53 +1,92 @@
-<form [formGroup]="productForm" novalidate>
-    <div class="form-group">
-        <div class="custom-file">
-            <input type="file" class="custom-file-input" id="customFile">
-            <label class="custom-file-label" for="customFile">Choose file</label>
-        </div>
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Cadastrar Produto</h3>
     </div>
-    <div class="row">
-        <div class="form-group col-md-6">
-            <label for="Nome">Produto
-                <b class="red">*</b>
-            </label>
-            <input type="text" class="form-control text-muted" name="nome" formControlName="nome" maxlength="80" placeholder="Nome">
+    <form role="form" [formGroup]="productForm">
+        <div class="box-body">
+            <div class="form-group">
+                <div class="custom-file">
+                    <label class="custom-file-label" for="customFile">Escolher Foto:</label>
+                    <input type="file" class="custom-file-input" id="customFile">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6"
+                    [ngClass]="{'has-error': formFields.nome.touched && formFields.nome.errors}">
+                    <label for="Nome">Produto
+                        <b class="text-danger">*</b>
+                    </label>
+                    <input type="text" class="form-control text-muted" [textMask]="{mask: mask}" name="nome" formControlName="nome"
+                        placeholder="Nome">
+                    <div *ngIf="formFields.nome.touched && formFields.nome.errors">
+                        <div class="help-block" role="alert">
+                            Preenchimento Obrigatório
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-md-6"
+                    [ngClass]="{'has-error': formFields.marca.touched && formFields.marca.errors}">
+                    <label for="Nome">Marca
+                        <b class="text-danger">*</b>
+                    </label>
+                    <input type="text" class="form-control text-muted" name="marca" formControlName="marca"
+                        maxlength="50" placeholder="Marca">
+                    <div *ngIf="formFields.marca.touched && formFields.marca.errors">
+                        <div class="help-block" role="alert">
+                            Preenchimento Obrigatório
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group"
+                [ngClass]="{'has-error': formFields.descricao.touched && formFields.descricao.errors}">
+                <label for="Nome">Descrição
+                    <b class="red">*</b>
+                </label>
+                <textarea name="descricao" class="form-control" formControlName="descricao" maxlength="200"
+                    rows="3"></textarea>
+                <div *ngIf="formFields.descricao.touched && formFields.descricao.errors">
+                    <div class="help-block" role="alert">
+                        Preenchimento Obrigatório
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6" [ngClass]="{'has-error': formFields.preco.touched && formFields.preco.errors}">
+                    <label for="Nome">Preço
+                        <b class="red">*</b>
+                    </label>
+                    <input type="text" class="form-control text-muted" name="preco" formControlName="preco"
+                        maxlength="10">
+                        <div *ngIf="formFields.preco.touched && formFields.preco.errors">
+                            <div class="help-block" role="alert">
+                                Preenchimento Obrigatório
+                            </div>
+                        </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputCategroria">Categoria</label>
+                    <select id="inputCategroria" class="form-control" formControlName="category"
+                        [compareWith]="compareFn">
+                        <option selected>Selecione</option>
+                        <option *ngFor="let category of categories" [ngValue]="category">
+                            {{category.nome}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                <button type="submit" class="btn btn-primary" (click)="save(productForm.value)"
+                    [disabled]="!productForm.valid">
+                    Salvar
+                </button>
+                <button class="btn btn-secondary" [routerLink]="['/product/list']">
+                    Cancelar
+                </button>
+            </div>
         </div>
-        <div class="form-group col-md-6">
-            <label for="Nome">Marca
-                <b class="red">*</b>
-            </label>
-            <input type="text" class="form-control text-muted" name="marca" formControlName="marca" maxlength="50" placeholder="Marca">
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="Nome">Descrição
-            <b class="red">*</b>
-        </label>
-        <textarea name="descricao" class="form-control" formControlName="descricao" maxlength="200" rows="3"></textarea>
-    </div>
-    <div class="row">
-        <div class="form-group col-md-6">
-            <label for="Nome">Preco
-                <b class="red">*</b>
-            </label>
-            <input type="number" class="form-control text-muted" name="preco" formControlName="preco" maxlength="10">
-        </div>
-        <div class="form-group col-md-6">
-            <label for="inputCategroria">Categoria</label>
-            <select id="inputCategroria" class="form-control" formControlName="category" [compareWith]="compareFn">
-                <option selected>Selecione</option>
-                <option *ngFor="let category of categories" [ngValue]="category">
-                    {{category.nome}}
-                </option>
-            </select>
-        </div>
-    </div>
-    <button type="submit" class="btn btn-outline-primary" (click)="save(productForm.value)">
-        Salvar
-    </button>
-    <button class="btn btn-outline-secondary" [routerLink]="['/product/list']">
-        Cancelar
-    </button>
-</form>
+    </form>
+</div>
 
-<!-- <span> {{productForm.value | json}}</span> -->
+<span> {{productForm.value | json}}</span>

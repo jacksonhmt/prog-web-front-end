@@ -10,7 +10,7 @@ import { ToastrService } from '../../toastr.service'
   templateUrl: './category-list.component.html'
 })
 export class CategoryListComponent implements OnInit {
-  
+
   listaVazia: boolean;
   dtTrigger: Subject<Category> = new Subject();
   selectedIndex: number;
@@ -46,12 +46,14 @@ export class CategoryListComponent implements OnInit {
     }
   }
 
-  //Deletando a categoria atravéz do ID
+  //Deletando a categoria atravéz do ID (Excluir Categoria)
   delete(id: number) {
     this.categoryService.delete(id).subscribe(response => {
       this.categorys = [];
       this.findAll();
+      this.toastrService.Success('Excluído com sucesso!');
+    }, (error) => {
+      this.toastrService.Error('Falha ao excluir a categoria! Tente novamente mais tarde!');
     });
-    this.toastrService.Success('Excluído com sucesso!');
   }
 }

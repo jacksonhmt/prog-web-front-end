@@ -12,7 +12,8 @@ import { ProductService } from './product/product.service';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { ShoppingCartService } from './shopping-cart/shopping-cart.service';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ToastrService } from './toastr.service'
+import { ToastrService } from './toastr.service';
+import { ModalExclusaoComponent } from './modal-exclusao/modal-exclusao.component'
 
 
 @NgModule({
@@ -20,14 +21,15 @@ import { ToastrService } from './toastr.service'
     HomeComponent,
     AppComponent,
     PageNotFoundComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    ModalExclusaoComponent
   ],
   imports: [
     HttpModule,
     HttpClientModule,
-    ReactiveFormsModule,
     CommonModule,
     BrowserModule,
+    ReactiveFormsModule,
     AppRoutingModule,
   ],
   providers: [{provide: LocationStrategy, useClass: HashLocationStrategy},

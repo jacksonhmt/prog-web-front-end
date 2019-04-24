@@ -1,40 +1,41 @@
 <div>
     <button [routerLink]="['/category/form']" type="button" class="btn btn-success">
-        Nova Categoria
+        <i class="fa fa-plus"></i> Nova Categoria
     </button>
 </div>
-<div class="mt-3">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th scope="col">Categoria</th>
-                <th scope="col">Ação</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let category of categorys">
-                <td>
-                    <div class="mt-1">{{category.nome}}</div>
-                </td>
-                <td>
-                    <button type="button" class="btn btn-outline-info btn-sm" [routerLink]="['/category/view/', category.id]" title="Visualizar {{category.nome}}">
-                        <i class="material-icons center-button">info</i>
-                    </button>
-                    <button type="button" class="btn btn-outline-primary btn-sm" [routerLink]="['/category/alter', category.id]" title="Alterar {{category.nome}}">
-                        <i class="material-icons center-button">create</i>
-                    </button>
-                    <button type="button" class="btn btn-outline-danger btn-sm" (click)="delete(category.id)" title="Excluir {{category.nome}}">
-                        <i class="material-icons center-button">delete_forever</i>
-                    </button>
-                </td>
-            </tr>
-            <tr *ngIf="listaVazia">
-                <td colspan="3">
-                    <div class="text-center mt-3">
-                        <p>Lista vazia!</p>
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+<div class="box" style="margin-top:10px">
+    <div class="box-header">
+        <h3 class="box-title">Categorias</h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <table id="example1" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Categoria</th>
+                    <th class="text-center">Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let category of categorys">
+                    <td class="col-md-10">{{category.nome}}</td>
+                    <td class="col-md-2 text-center">
+                        <button type="button" class="btn btn-default btn-sm"
+                            [routerLink]="['/category/view/', category.id]" title="Visualizar {{category.nome}}">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        <button type="button" class="btn btn-primary btn-sm"
+                            [routerLink]="['/category/alter', category.id]" title="Alterar {{category.nome}}">
+                            <i class="fa fa-pencil"></i>
+                        </button>
+                        <button type="button" class="btn btn-danger btn-sm" (click)="delete(category.id)"
+                            title="Excluir {{category.nome}}">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+        </table>
+    </div>
+    <!-- /.box-body -->
 </div>
+<!-- /.box -->

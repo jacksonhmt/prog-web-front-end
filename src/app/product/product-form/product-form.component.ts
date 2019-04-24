@@ -13,7 +13,6 @@ import { ToastrService } from '../../toastr.service'
   templateUrl: './product-form.component.html',
 })
 export class ProductFormComponent implements OnInit {
-  
   productForm: FormGroup;
   product: Product;
   categories: Category[];
@@ -43,6 +42,7 @@ export class ProductFormComponent implements OnInit {
       category: ['', [Validators.required, Validators.maxLength(10)]],
     }, {})
 
+    //Busca o produto pelo código (Alterar Produto)
     this.route.params.forEach((params: Params) => {
       let id: number = +params['id'];
       if (id) {
@@ -53,17 +53,23 @@ export class ProductFormComponent implements OnInit {
       }
     })
   }
+
+  get formFields(){
+    return this.productForm.controls;
+  }
   
   compareFn(c1: Category, c2: Category): boolean{
     return c1 && c2 ? c1.id === c2.id : c1 === c2;
   }
 
-  // Salva a categoria e retorna a lista de categorias
+  // Salva o produto (Cadastrar Produto)
   save(product: Product) {
     this.productService.save(product).subscribe(data => {
       this.router.navigate(['/product']);
-    })
-    this.toastrService.Success('Salvo com sucesso!');
+      this.toastrService.Success('Salvo com sucesso!');
+    }, (error) => {
+      this.toastrService.Error('Falha ao salvar o produto! Tente novamente mais tarde!');
+    });
   }
 
   private handleError(err: any): Promise<any> {

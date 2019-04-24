@@ -1,19 +1,17 @@
-<!-- <div class="text-center">
-    <img src="../../assets/apple1.png" alt="Logo" width="500">
-    <h1>Bem vindo!</h1>
-    <h4>Descubra o mundo inovador da Apple!</h4>
-</div> -->
-
-<div class="mb-5 row">
-    <div class="col-md-4 mt-2" *ngFor="let product of products">
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title text-center"><a [routerLink]="['/product/view/', product.id]">{{product.nome}}</a></h5>
-                <p class="card-text">{{product.descricao}}</p>
-                <h4 class="card-text">
-                    <b>R$ {{product.preco}}.00</b>
-                </h4>
-                <a href="#" class="btn btn-primary" (click)="enviandoAoCarrinho(product)">Comprar</a>
+<div class="row">
+    <div class="col-md-6 col-sm-6 col-xs-12" *ngFor="let product of products">
+        <div class="info-box pl-2">
+            <div class="info-box" >
+                <span class="info-box-icon bg-blue"><i class="fa fa-mobile"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-number">{{product.nome}}</span>
+                    <span class="info-box-text">{{product.descricao}}</span>
+                    <span class="info-box-number">{{product.preco | currency:'BRL':'symbol':'1.2-2'}}</span>
+                    <a class="btn btn-success" (click)="enviandoAoCarrinho(product)">
+                        <i class="fa fa-cart-plus"></i> 
+                        Adicionar à Lista
+                    </a>
+                </div>
             </div>
         </div>
     </div>

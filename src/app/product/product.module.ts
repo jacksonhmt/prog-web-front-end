@@ -7,7 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { ProductRoutingModule } from './product-routing.module';
 import { HttpClientModule } from '@angular/common/http'
-
+import { TextMaskModule } from 'angular2-text-mask';
 import { ProductFormComponent } from './product-form/product-form.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductViewComponent } from './product-view/product-view.component';
@@ -25,7 +25,7 @@ import { CategoryService } from '../category/category.service';
     HttpModule,
     HttpClientModule,
     RouterModule,
-
+    TextMaskModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,

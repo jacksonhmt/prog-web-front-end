@@ -14,6 +14,8 @@ import { ToastrService } from '../toastr.service'
 })
 
 export class HomeComponent implements OnInit {
+  public mask = ['(', /[1-9]/, /\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+  
   dtTrigger: Subject<Product> = new Subject();
   selectedIndex: number;
   products: Product[];

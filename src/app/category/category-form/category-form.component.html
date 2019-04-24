@@ -1,16 +1,31 @@
-<form [formGroup]="categoryForm" novalidate>
-    <div class="form-group">
-        <label for="Nome">Categoria
-            <b class="red">*</b>
-        </label>
-        <input type="text" class="form-control text-muted" name="nome" formControlName="nome" maxlength="50" placeholder="Categoria">
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title">Cadastrar Categoria</h3>
     </div>
-    <button type="submit" class="btn btn-outline-primary" (click)="save(categoryForm.value)">
-        Salvar
-    </button>
-    <button class="btn btn-outline-secondary" [routerLink]="['/category/list']">
-        Cancelar
-    </button>
-</form>
+    <form [formGroup]="categoryForm">
+        <div class="box-body">
+            <div class="form-group" [ngClass]="{ 'has-error': formFields.nome.touched && formFields.nome.errors }">
+                <label for="nome"><b class="text-danger">*</b> Nome:</label>
+                <input type="text" class="form-control has-danger" id="nome" formControlName="nome"
+                    placeholder="Digite o nome do modelo..." maxlength="50">
+                <div *ngIf="formFields.nome.touched && formFields.nome.errors" class="invalid-feedback">
+                    <div *ngIf="formFields.nome.errors.required"
+                        class="help-block" role="alert">
+                        Preenchimento obrigatório!</div>
+                </div>
+            </div>
+            
+        </div>
+        <div class="box-footer">
+            <button type="submit" class="btn btn-primary" (click)="save(categoryForm.value)"
+            [disabled]="!categoryForm.valid">
+                Salvar
+            </button>
+            <button class="btn btn-secondary" [routerLink]="['/category/list']">
+                Cancelar
+            </button>
+        </div>
+    </form>
+</div>
 
 <!-- <span> {{categoryForm.value | json}}</span> -->

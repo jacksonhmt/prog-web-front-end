@@ -10,7 +10,6 @@ import { ToastrService } from '../../toastr.service'
   templateUrl: './product-list.component.html'
 })
 export class ProductListComponent implements OnInit {
-  
   listaVazia: boolean;
   dtTrigger: Subject<Product> = new Subject();
   selectedIndex: number;
@@ -26,7 +25,7 @@ export class ProductListComponent implements OnInit {
     this.findAll();
   }
 
-  //Retornando Lista
+  //Realiza a busca dos produtos
   findAll() {
     this.productService.findAll()
       .subscribe(products => {
@@ -44,12 +43,14 @@ export class ProductListComponent implements OnInit {
     }
   }
 
-  //Deletando a categoria atravéz do ID
+  //Deletando o produto atravéz do ID (Excluir Produto)
   delete(id: number) {
     this.productService.delete(id).subscribe(response => {
       this.products = [];
       this.findAll();
+      this.toastrService.Success('Excluído com sucesso!');
+    }, (error) => {
+      this.toastrService.Error('Falha ao excluir o produto! Tente novamente mais tarde!');
     });
-    this.toastrService.Success('Excluído com sucesso!');
   }
 }
